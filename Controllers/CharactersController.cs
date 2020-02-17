@@ -20,9 +20,17 @@ namespace MvcCharacter.Controllers
         }
 
         // GET: Characters
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Character.ToListAsync());
+            var characters = from c in _context.Character
+                             select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                characters = characters.Where(s => s.CharacterName.Contains(searchString));
+            }
+
+            return View(await characters.ToListAsync());
         }
 
         // GET: Characters/Details/5
