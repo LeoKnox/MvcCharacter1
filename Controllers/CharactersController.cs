@@ -20,17 +20,32 @@ namespace MvcCharacter.Controllers
         }
 
         // GET: Characters
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string characterClass, string searchString)
         {
+            IQueryable<string> classQuery = from c in _context.Character
+                                            orderby c.CharacterClass
+                                            select c.CharacterClass;
+
             var characters = from c in _context.Character
                              select c;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 characters = characters.Where(s => s.CharacterName.Contains(searchString));
             }
 
-            return View(await characters.ToListAsync());
+            if (!string.IsNullOrEmpty(characterClass))
+            {
+                characters = characters.Where(x => x.CharacterClass == characterClass);
+            }
+
+            var characterClassVM = new CharacterClassViewModel
+            {
+                Classes = new SelectList(await classQuery.Distinct().ToListAsync()),
+                Characters = await characters.ToListAsync()
+            };
+
+            return View(characterClassVM);
         }
 
         // GET: Characters/Details/5

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MvcCharacter.Models.Character>
+﻿@model MvcCharacter.Models.CharacterClassViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,26 +9,37 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+<form asp-controller="Characters" asp-action="Index" method="get">
+    <p>
+        <select asp-for="CharacterClass" asp-items="Model.Classes">
+            <option value="">All</option>
+        </select>
+
+        Character: <input type="text" name="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CharacterName)
+                @Html.DisplayNameFor(model => model.Characters[0].CharacterName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CharacterClass)
+                @Html.DisplayNameFor(model => model.Characters[0].CharacterClass)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HP)
+                @Html.DisplayNameFor(model => model.Characters[0].HP)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AC)
+                @Html.DisplayNameFor(model => model.Characters[0].AC)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Characters) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CharacterName)
