@@ -23,5 +23,6 @@ namespace MvcCharacter.Models
         public int HP { get; set; }
         [Range(1, 100)]
         public int AC { get; set; }
+        public ICollection<Weapon> Weapons { get; set; }
     }
 }
