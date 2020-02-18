@@ -30,6 +30,9 @@
                 @Html.DisplayNameFor(model => model.Characters[0].CharacterClass)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Characters[0].Atk)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Characters[0].HP)
             </th>
             <th>
@@ -46,6 +49,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CharacterClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Atk)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HP)

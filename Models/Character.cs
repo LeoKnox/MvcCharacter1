@@ -16,6 +16,9 @@ namespace MvcCharacter.Models
         [Required]
         [Display(Name = "Class")]
         public string CharacterClass { get; set; }
+        [Range(1, 250)]
+        [Display(Name = "Attack")]
+        public int Atk { get; set; }
         [Range(1, Int32.MaxValue)]
         public int HP { get; set; }
         [Range(1, 100)]
